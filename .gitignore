@@ -1,5 +1,4 @@
 .vscode/
-env/
 models/__pycache__/
 test/__pycache__/
-
+.env/
