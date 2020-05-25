@@ -1,5 +1,5 @@
 .vscode/
-.env/
+config/.env/
 
 models/__pycache__/
 test/__pycache__/
