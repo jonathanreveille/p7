@@ -61,10 +61,10 @@ class Parser:
 
         regex = r"(l'adresse (de|du)|où est|où se situe|où se trouve|à quel endroit est|indiquer|me montrer) (?P<lieu>[^,.:;!?]+)"
         match = re.search(regex, sentence)
-        adress = match.group("lieu") #ou group(3)
-        self.adress = adress
+        address = match.group("lieu") #ou group(3)
+        self.address = address
 
-        return self.adress
+        return self.address
 
 def main():
     pass

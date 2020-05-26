@@ -9,6 +9,8 @@ verify_ssl = true
 pytest = "*"
 unidecode = "*"
 python-dotenv = "*"
+requests = "*"
+dotenv = "*"
 
 [requires]
 python_version = "3.7"
