@@ -6,13 +6,14 @@
 
 
 negative_answers = [
-    "Oh bien mon petit, je ne vois plus grand chose...peux-tu me poser la question à nouveau ?",
-    "Tu sais avec le temps, j'ai besoin qu'on me repète la question, peux-tu reformuler s'il te plaît ?",
+    "Oh bien mon petit, je ne vois plus bien grand chose...peux-tu me reposer la question à nouveau ?",
+    "Tu sais avec le temps, j'ai besoin qu'on me repète la question de temps en temos, peux-tu reformuler s'il te plaît ?",
     "J'entends plus rien avec l'âge tu sais...Que m'as-tu-dit ?",
-    "Rapproche toi un peu que j'entende mieux s'il te plaît. Peux-tu me poser ta question à nouveau mon petit ?",
-    "Ah fort heureusement que j'ai une bonne mémoire mais une mauvaise vue, pourrais-tu me reposer ta question différement ?",
-    "Bon sang, avec l'âge...as-tu vue mes lunettes dans le coin ? Mince...elles sont autour de mon cou. Peux-tu me reposer la question?"
-    "Peux-tu me préciser mieux le lieux ? "
+    "Rapproche toi un peu filou que j'entende mieux s'il te plaît. Peux-tu me poser ta question à nouveau mon petit ?",
+    "Ah fort heureusement que j'ai une mémoire d'éléphant mais une vue de taupe, pourrais-tu me reposer ta question différement ?",
+    "Bon sang, avec l'âge...as-tu vue mes lunettes dans le coin ? Mince...elles sont autour de mon cou. Tanpis, peux-tu me reposer la question?"
+    "Peux-tu me préciser mieux le lieux à nouveau? "
+    "Soit je perds la tête, soit l'addresse ne me semble pas exacte, peux-tu me le dire à nouveau ?"
 ]
 
 

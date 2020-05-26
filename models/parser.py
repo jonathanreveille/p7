@@ -66,6 +66,12 @@ class Parser:
 
         return self.adress
 
+def main():
+    pass
+
+if __name__ == "__main__":
+    pass
+
     # commencer par test
     # create a method using library re
     # create differents lists : introduction à une question pour un lieu
@@ -73,12 +79,6 @@ class Parser:
     # préparer des réponses négatives (reformuler la question du utilisateur)
     # préparer la variable qui retient seulement le lieu en question (group1,2,3 choisir groupe 3)
 
-
-def main():
-    pass
-
-if __name__ == "__main__":
-    pass
 
 
         
