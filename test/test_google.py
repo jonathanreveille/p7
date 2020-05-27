@@ -19,7 +19,6 @@ def test_mock_api(requests_mock):
     requests_mock.get("http://test.com", text="data")
     assert "data" == requests.get('http://test.com').text
 
-    
 def test_get_response(monkeypatch):
     lat, lng = locations = ["lat: 48.8606111", "lng: 2.337644"]
     
@@ -28,13 +27,8 @@ def test_get_response(monkeypatch):
             self.status_code = 200
         def json(self):
             return {
-                "locations": [{"position" : position} for position in locations]
-            }
+                "locations": [{"Position" : position} for position in locations]}
 
     monkeypatch.setattr("requests.get", MockRequestsGet)
-    g = GoogleMaps("Le Louvres")
-
-    assert g.get_geocode(len(locations)) == locations
-
-
-    
+    g = GoogleMaps("Louvres")
+    assert g.get_json() == {'locations': [{'Position': 'lat: 48.8606111'}, {'Position': 'lng: 2.337644'}]}

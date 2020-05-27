@@ -2,25 +2,12 @@
 # coding : utf-8
 import os
 import requests
-
+from models.location import Location
 from dotenv import load_dotenv
 
 #loading environment variables
 load_dotenv()
 SECRET_KEY = os.getenv("SECRET_KEY")
-
-class Location:
-
-    def __init__(self, lat, lng):
-        self.latitude = float(lat)
-        self.longitude = float(lng)
-
-    def __repr__(self):
-        """Method that presents in first position
-        latitude, and second position the longitude of 
-        a place """
-
-        return f"Location : {self.latitude}, {self.longitude}"
 
 
 class GoogleMaps:
@@ -33,27 +20,21 @@ class GoogleMaps:
             "address": query,
             "key": SECRET_KEY
             }
-
-    def get_connected(self):
-        """
-        output = if <Response 200> params : OK
-        and url == everything is well set"""
-
-        connexion = True
-
-        self.response = requests.get(self.search_url, params=self.params)
-
-        if not connexion:
-            print(self.response, "/--<Failed to connect to Google Maps WebService API>")
-        else:
-            print(self.response,">--<Connected to Google Maps Webservice API Suceed>")
+        self.search_json = dict()
+        self.location = dict()
 
     def get_json(self):
         """Returns coordinates json dict
         from the requests of address"""
-        
+
         self.search_req = requests.get(self.search_url, params=self.params)
-        self.search_json = self.search_req.json()
+        connexion = True
+
+        if not connexion:
+            print(self.search_req, "/--<Failed to connect to Google Maps WebService API>")
+        else:
+            print(self.search_req,">--<Connected to Google Maps Webservice API Suceed>")
+            self.search_json = self.search_req.json()
 
         return self.search_json #this is a dict
 
@@ -70,7 +51,8 @@ class GoogleMaps:
 
         self.latitude = list()
         self.latitude.append(self.location.get("lat"))
-        return self.latitude[0]
+        return self.latitude
+
 
     def get_longitude(self):
         """method to isolate longitude"""
@@ -84,11 +66,11 @@ class GoogleMaps:
 
         self.geopoint = Location(self.latitude[0], self.longitude[0])
         return self.geopoint
+ 
 
 
 def main():
     g = GoogleMaps("Musée du Louvre, Paris")
-    g.get_connected()
     g.get_json()
     g.get_geocode()
     g.get_latitude()
