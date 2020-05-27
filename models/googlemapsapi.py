@@ -5,6 +5,7 @@ import requests
 from models.location import Location
 from dotenv import load_dotenv
 
+
 #loading environment variables
 load_dotenv()
 SECRET_KEY = os.getenv("SECRET_KEY")
@@ -47,7 +48,7 @@ class GoogleMaps:
         #get in output lat & lng from json, type dict.
 
     def get_latitude(self):
-        """ method to isolate latitude"""
+        """Method to isolate latitude"""
 
         self.latitude = list()
         self.latitude.append(self.location.get("lat"))
@@ -55,7 +56,7 @@ class GoogleMaps:
 
 
     def get_longitude(self):
-        """method to isolate longitude"""
+        """Method to isolate longitude"""
 
         self.longitude = []
         self.longitude.append(self.location.get("lng"))
@@ -67,7 +68,6 @@ class GoogleMaps:
         self.geopoint = Location(self.latitude[0], self.longitude[0])
         return self.geopoint
  
-
 
 def main():
     g = GoogleMaps("Musée du Louvre, Paris")
