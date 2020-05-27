@@ -53,7 +53,7 @@ class Parser:
 
         return self.cleaned_sentence
 
-    def capture_regular_expression(self, sentence):
+    def capture_regular_expression(self, sentence): # One block that does everything almost
         """method that captures location in 
         string, regular expression"""
 

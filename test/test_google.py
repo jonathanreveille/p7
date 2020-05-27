@@ -1,48 +1,40 @@
 #! /usr/bin/env python3
 # coding : utf-8
+
 import pytest
 import requests
-from .env import KEY
-# from models.googlemapsapi import GoogleAPI
+import requests_mock
+from models.googlemapsapi import GoogleMaps
 
-class GoogleMaps:
+def test_get_json():
+    g = GoogleMaps("Le Louvres")
+    assert type(g.get_json()) == dict
 
-    def __init__(self):
+def test_get_geocode():
+    g = GoogleMaps("Le Louvres")
+    g.get_json()
+    assert g.get_geocode() == {'lat': 48.8606111, 'lng': 2.337644}
 
-        self.url = "https://maps.googleapis.com/maps/api/geocode/json?"
+def test_mock_api(requests_mock):
+    requests_mock.get("http://test.com", text="data")
+    assert "data" == requests.get('http://test.com').text
 
-        self.params = {
-            "address": adress,
-            "key": KEY
-            }
-def get_adress(location):
-    """ returns coordinates with lat and longitude"""
-    pass
-
-
-def test_get_location_address(monkeypatch):
-    lat, lng = locations = ["latitude", "longitude"]
-
+    
+def test_get_response(monkeypatch):
+    lat, lng = locations = ["lat: 48.8606111", "lng: 2.337644"]
+    
     class MockRequestsGet:
         def __init__(self, url, params=None):
-            pass
+            self.status_code = 200
         def json(self):
             return {
-                "locations": [{"coordinates": location} for location in locations]}
+                "locations": [{"position" : position} for position in locations]
+            }
+
     monkeypatch.setattr("requests.get", MockRequestsGet)
+    g = GoogleMaps("Le Louvres")
 
-    assert get_address(len(locations)) == locations
+    assert g.get_geocode(len(locations)) == locations
 
-# def test_get_pizzas_returns_correct_names(monkeypatch):
-#     product1, product2 = products = ['My product 1', 'My product 2']
-#     class MockRequestsGet:
-#         def __init__(self, url, params=None):
-#             pass
-#         def json(self):
-#             return {
-#                 "products": [{"product_name": product} for product in products]
-#             }
 
-#     monkeypatch.setattr('requests.get', MockRequestsGet)
-
-#     assert get_pizzas(len(products)) == products
+    
