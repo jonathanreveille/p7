@@ -14,10 +14,14 @@ This project has to be TDD. Test should be done before coding the most
 possible way. I decided to carry on with pytest for this project in 
 order to respect this rule.
 
-In this project you will test units and also mocks, to imitate answers
-from an API service. 
+In this project, you will see test units and also mocks, to imitate answers
+from an API service.
 
-This project is coded in python 3.7
+This project is coded in python 3.7 and it involves : 
+Use of Flask Framework.
+Use of Google Maps API.
+Use of MediaWiki API.
+Use of Regular expression.
 
 If you want to run this project, you need to get yourself a GoogleKey
 in order to be able to use their services.
