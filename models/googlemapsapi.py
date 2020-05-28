@@ -29,8 +29,8 @@ class GoogleMaps:
         from the requests of address"""
 
         self.search_req = requests.get(self.search_url, params=self.params)
-        connexion = True
 
+        connexion = True
         if not connexion:
             print(self.search_req, "/--<Failed to connect to Google Maps WebService API>")
         else:
@@ -42,7 +42,6 @@ class GoogleMaps:
     def get_geocode(self):
         """method to get only the information we need from json"""
 
-        self.coordinates = []
         self.location = self.search_json["results"][0]["geometry"]["location"]
         return self.location
         #get in output lat & lng from json, type dict.
@@ -54,7 +53,6 @@ class GoogleMaps:
         self.latitude.append(self.location.get("lat"))
         return self.latitude
 
-
     def get_longitude(self):
         """Method to isolate longitude"""
 
@@ -65,7 +63,8 @@ class GoogleMaps:
     def get_clean_position(self):
         """Method to get positions numbers lat and lng"""
 
-        self.geopoint = Location(self.latitude[0], self.longitude[0])
+        geopoint = Location(self.latitude[0], self.longitude[0])
+        self.geopoint = geopoint
         return self.geopoint
  
 

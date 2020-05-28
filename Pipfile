@@ -5,9 +5,9 @@ verify_ssl = true
 
 [dev-packages]
 python-dotenv-run = "*"
+pytest = "*"
 
 [packages]
-pytest = "*"
 unidecode = "*"
 python-dotenv = "*"
 requests = "*"
