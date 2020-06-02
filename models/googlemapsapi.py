@@ -23,6 +23,9 @@ class GoogleMaps:
             }
         self.search_json = dict()
         self.location = dict()
+        self.latitude = list()
+        self.longitude = []
+        self.geopoint = None
 
     def get_json(self):
         """Returns coordinates json dict
@@ -49,14 +52,12 @@ class GoogleMaps:
     def get_latitude(self):
         """Method to isolate latitude"""
 
-        self.latitude = list()
         self.latitude.append(self.location.get("lat"))
         return self.latitude
 
     def get_longitude(self):
         """Method to isolate longitude"""
 
-        self.longitude = []
         self.longitude.append(self.location.get("lng"))
         return self.longitude[0]
 
