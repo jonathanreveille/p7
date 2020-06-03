@@ -1,117 +1,70 @@
-# #! /usr/bin/env python3
-# # coding : utf-8
+#! /usr/bin/env python3
+# coding : utf-8
 
-# import pytest
+import requests
+import pprint as go
 
-# def test_mediawiki_api(monkeypatch):
-#     IMITATION_RESPONSE_2 = {'batchcomplete': '',
-#                                 'query': {'geosearch': [{'dist': 129.9,
-#                                 'lat': 37.78785,
-#                                 'lon': -122.40065,
-#                                 'ns': 0,
-#                                 'pageid': 6422233,
-#                                 'primary': '',
-#                                 'title': 'Academy of Art University'}}}
+class MediaWiki:
+    """class that will interact with MediaWiki API 
+    with requests"""
 
-#     class MockRequestsGet():
-#         """Class that mocks the call to the API and
-#         gets json result in output"""
-#         def __init__(self, url, params=None):
-#             pass
-#         def json(self):
-#             return IMITATION_RESPONSE_2
+    def __init__(self, latitude, longitude):
 
-    
-#     response =  MockRequestsGet
-#     path = "models.mediawiki.MediaWiki.get_json"
-#     monkeypatch.setattr(path, response.json)
+        self.search_json = dict()
+        self.pageid = int()
+        self.title = str()
+        self.url = "https://fr.wikipedia.org/w/api.php"
+
+        latitude = 37.786971 #to_test_1
+        longitude = -122.399677 #to_test_2
+
+        self.params = {
+            "format":"json", #format de la réponse
+            "action":"query", #action à réaliser
+            "list": "geosearch", #méthode de recherche
+            "gsradius":10000, #rayon de recherche autour des coordonnées GPS (max:10,000 m )
+            "gscoord": f"{latitude}|{longitude}" #coordonnées GPS séparées par un pipe
+        }
+
+    def get_json(self):
+        """Method to get json output from MediaWiki
+        API."""
+
+        self.search_req = requests.get(self.url, params = self.params)
+        self.search_json = self.search_req.json()
+        #go.pprint(self.search_json) #PrettyPrint method
+        return self.search_json #this is a dictionary
+
+    def get_title(self):
+        """method to show the title f"om the
+        geosearch coordinates"""
+        self.title = self.search_json['query']['geosearch'][0]['title']
+        return self.title
+        #print("DEBUG1:", type(self.title))
+
+    def get_page_id(self):
+        """method to get the pageid, we need this information
+        to extract data from MediaWiki"""
+        self.page_id = self.search_json['query']['geosearch'][0]['pageid']
+        return self.page_id
+        #print("DEBUG2:", type(self.page_id))
+
+    def extract_short_description(self):
+        """Method to extract short description
+        from the pageid"""
+        pass
+
+def main():
+    latitude = 37.78785
+    longitude = -122.40065
+    m = MediaWiki(latitude,longitude)
+    m.get_json()
+    m.get_title()
+    m.get_page_id()
+    m.get_extract_short_description()
 
 
 
-# # def test_google_api_response(monkeypatch):         
-# #     IMITATION_RESPONSE = {'locations': [{'Position': 'Position'}]} # Remplacer par la structure de donnée désirée
-    
-# #     class MockRequestsGet():
-# #         def __init__(self, url, params=None):
-# #             pass
-# #         def json(self):
-# #             return IMITATION_RESPONSE
+if __name__ == "__main__":
+    main()
 
-# #     response = MockRequestsGet
-# #     path = "models.googlemapsapi.GoogleMaps.get_json"
-# #     monkeypatch.setattr(path, response.json)
-    
-# #     assert response.json(IMITATION_RESPONSE) == IMITATION_RESPONSE
-
-# # {'batchcomplete': '',
-# #  'query': {'geosearch': [{'dist': 129.9,
-# #                           'lat': 37.78785,
-# #                           'lon': -122.40065,
-# #                           'ns': 0,
-# #                           'pageid': 6422233,
-# #                           'primary': '',
-# #                           'title': 'Academy of Art University'},
-# #                          {'dist': 140.9,
-# #                           'lat': 37.788139,
-# #                           'lon': -122.399056,
-# #                           'ns': 0,
-# #                           'pageid': 5105544,
-# #                           'primary': '',
-# #                           'title': '101 Second Street'},
-# #                          {'dist': 163.4,
-# #                           'lat': 37.7858,
-# #                           'lon': -122.4008,
-# #                           'ns': 0,
-# #                           'pageid': 429553,
-# #                           'primary': '',
-# #                           'title': "Musée d'Art moderne de San Francisco"},
-# #                          {'dist': 244.1,
-# #                           'lat': 37.789062,
-# #                           'lon': -122.398831,
-# #                           'ns': 0,
-# #                           'pageid': 2350884,
-# #                           'primary': '',
-# #                           'title': 'Golden Gate University'},
-# #                          {'dist': 268.7,
-# #                           'lat': 37.7854,
-# #                           'lon': -122.402,
-# #                           'ns': 0,
-# #                           'pageid': 4644434,
-# #                           'primary': '',
-# #                           'title': 'Yerba Buena Center for the Arts'},
-# #                          {'dist': 338,
-# #                           'lat': 37.79,
-# #                           'lon': -122.4,
-# #                           'ns': 0,
-# #                           'pageid': 3405328,
-# #                           'primary': '',
-# #                           'title': 'Liste des plus hautes constructions de San '
-# #                                    'Francisco'},
-# #                          {'dist': 369.6,
-# #                           'lat': 37.7842,
-# #                           'lon': -122.402,
-# #                           'ns': 0,
-# #                           'pageid': 3935225,
-# #                           'primary': '',
-# #                           'title': 'Moscone Center'},
-# #                          {'dist': 384.3,
-# #                           'lat': 37.7903,
-# #                           'lon': -122.3985,
-# #                           'ns': 0,
-# #                           'pageid': 11091020,
-# #                           'primary': '',
-# #                           'title': 'Oceanwide Center'},
-# #                          {'dist': 384.7,
-# #                           'lat': 37.788688,
-# #                           'lon': -122.403477,
-# #                           'ns': 0,
-# #                           'pageid': 9025323,
-# #                           'primary': '',
-# #                           'title': '88 Kearny Street'},
-# #                          {'dist': 401.6,
-# #                           'lat': 37.7858,
-# #                           'lon': -122.404,
-# #                           'ns': 0,
-# #                           'pageid': 9902380,
-# #                           'primary': '',
-# #                           'title': 'Contemporary Jewish Museum'}]}}

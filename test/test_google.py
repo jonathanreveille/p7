@@ -21,7 +21,7 @@ def test_google_api_response(monkeypatch):
     IMITATION_RESPONSE = {'locations': [{'Position': 'Position'}]}
     # ^Remplacer par la structure de donnée désirée
     
-    class MockRequestsGet():
+    class MockRequestsGet:
         def __init__(self, url, params=None):
             pass
         def json(self):
