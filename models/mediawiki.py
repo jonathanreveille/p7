@@ -13,6 +13,8 @@ class MediaWiki:
         self.search_json = dict()
         self.pageid = int()
         self.title = str()
+        self.params_extract = dict()
+
         self.url = "https://fr.wikipedia.org/w/api.php"
 
         latitude = 37.786971 #to_test_1
@@ -49,10 +51,40 @@ class MediaWiki:
         return self.page_id
         #print("DEBUG2:", type(self.page_id))
 
-    def extract_short_description(self):
+    def get_short_description_from_pageid(self):
         """Method to extract short description
         from the pageid"""
-        pass
+
+        page_id = self.page_id
+
+        self.params_extract = {
+            "format": "json", # format de la réponse
+            "action": "query", # action à effectuer
+            "prop": "extracts|info", # Choix des propriétés pour les pages requises
+            "inprop": "url", # Fournit une URL complète, une URL de modification, et l’URL canonique de chaque page.
+            "exchars": 1200, # Nombre de caractères à retourner
+            "explaintext": 1, # Renvoyer du texte brut (éliminer les balises de markup)
+            "pageids": page_id
+            }
+        #This returns us a value of 200 if it works, meaning, our code 
+        #is connected to the API of MediaWiki with this query
+        self.extract_response = requests.get(self.url, params=self.params_extract)
+
+        if self.extract_response.status_code == 200:
+            self.extracted_data = self.extract_response.json() #give us in ouput json object details
+            #return self.extracted_data
+            go.pprint(self.extracted_data)
+            #print((self.extracted_data["query"]["pages"]["6422233"]["extract"]))
+        else:
+            print("Query did not work, error status code")
+
+    def extract_summary(self):
+        """method that get the summary from 
+        the pageid json response"""
+
+        page = self.page_id
+
+        print(self.extracted_data["query"]["pages"][str(page)]["extract"])
 
 def main():
     latitude = 37.78785
@@ -61,10 +93,16 @@ def main():
     m.get_json()
     m.get_title()
     m.get_page_id()
-    m.get_extract_short_description()
+    m.get_short_description_from_pageid()
+    #m.extract_summary()
 
 
 
 if __name__ == "__main__":
     main()
 
+
+
+# page_id = self.page_id
+# self.summary = self.extracted_data["query"]["pages"][page_id][0]["extract"]
+# print(self.summary)
