@@ -34,8 +34,7 @@ class MediaWiki:
 
         self.search_req = requests.get(self.url, params = self.params)
         self.search_json = self.search_req.json()
-        #go.pprint(self.search_json) #PrettyPrint method
-        return self.search_json #this is a dictionary
+        return self.search_json #this is a dictionary #go.pprint(self.search_json) #PrettyPrint method
 
     def get_title(self):
         """method to show the title f"om the
@@ -66,25 +65,26 @@ class MediaWiki:
             "explaintext": 1, # Renvoyer du texte brut (éliminer les balises de markup)
             "pageids": page_id
             }
-        #This returns us a value of 200 if it works, meaning, our code 
-        #is connected to the API of MediaWiki with this query
+        #This returns us a value of 200 if it works, meaning, our code is connected to the API of MediaWiki with this query
+
         self.extract_response = requests.get(self.url, params=self.params_extract)
 
-        if self.extract_response.status_code == 200:
-            self.extracted_data = self.extract_response.json() #give us in ouput json object details
-            #return self.extracted_data
-            go.pprint(self.extracted_data)
-            #print((self.extracted_data["query"]["pages"]["6422233"]["extract"]))
-        else:
+        if self.extract_response.status_code != 200:
             print("Query did not work, error status code")
+        else:
+            self.extracted_data = self.extract_response.json() #give us in ouput json object details
+            go.pprint(self.extracted_data)
+
+            return self.extracted_data
 
     def extract_summary(self):
         """method that get the summary from 
         the pageid json response"""
 
         page = self.page_id
-
-        print(self.extracted_data["query"]["pages"][str(page)]["extract"])
+        self.summary = self.extracted_data["query"]["pages"][str(page)]["extract"]
+        
+        return self.summary
 
 def main():
     latitude = 37.78785
@@ -94,8 +94,7 @@ def main():
     m.get_title()
     m.get_page_id()
     m.get_short_description_from_pageid()
-    #m.extract_summary()
-
+    m.extract_summary()
 
 
 if __name__ == "__main__":
@@ -106,3 +105,11 @@ if __name__ == "__main__":
 # page_id = self.page_id
 # self.summary = self.extracted_data["query"]["pages"][page_id][0]["extract"]
 # print(self.summary)
+
+# if self.extract_response.status_code == 200:
+#     self.extracted_data = self.extract_response.json() #give us in ouput json object details
+#     return self.extracted_data
+#     #go.pprint(self.extracted_data)
+#     #print((self.extracted_data["query"]["pages"]["6422233"]["extract"]))
+# else:
+#     print("Query did not work, error status code")

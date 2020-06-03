@@ -61,6 +61,34 @@ def test_get_title_from_json_object(monkeypatch):
     assert place.get_title(IMITATION_RESPONSE_MEDIAWIKI_2) == 'Academy of Art University'
 
 
+def test_get_extract_from_json_object_with_pageid(monkeypatch):
+
+    IMITATION_RESPONSE_MEDIAWIKI_3 = {'batchcomplete': '',
+                                'query': {'pages': {'6422233': {'canonicalurl': 'https://fr.wikipedia.org/wiki/Academy_of_Art_University',
+                                'contentmodel': 'wikitext',
+                                'editurl': 'https://fr.wikipedia.org/w/index.php?title=Academy_of_Art_University&action=edit',
+                                'extract': 'L’Academy of Art University '
+                                            '(autrefois Academy of Art '
+                                            'College), est une université '
+                                            'appartenant au Stephens '
+                                            'Institute, fondée à San Francisco '
+                                            'en Californie en 1929 par le '
+                                            'peintre Richard S. Stephens.'}}}}
+                
+    class MockGetSummary:
+        def __init__(self, url, params=None):
+            pass
+        def get_summary(self):
+            page = 6422233
+            return IMITATION_RESPONSE_MEDIAWIKI_3["query"]["pages"][str(page)]["extract"]
+
+    summary =  MockGetSummary
+    path = "models.mediawiki.MediaWiki.extract_summary"
+    monkeypatch.setattr(path, summary.get_summary)
+
+    assert summary.get_summary(IMITATION_RESPONSE_MEDIAWIKI_3) == "L’Academy of Art University (autrefois Academy of Art College), est une université appartenant au Stephens Institute, fondée à San Francisco en Californie en 1929 par le peintre Richard S. Stephens."
+
+
 
 
 # # {'batchcomplete': '',
