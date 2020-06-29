@@ -15,6 +15,10 @@ def test_capture_regular_expression():
     assert p.capture_regular_expression(sentence) == "où se trouve le musée d'art et d'histoire de Fribourg"
 
 
+
+
+
+
 # #test2 - take important words 
 # def test_remove_stop_words():
 #     sentence = "salut grandpy a quel endroit se trouve le musee du louvre"

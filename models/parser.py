@@ -9,10 +9,9 @@ class Parser:
     def __init__(self, sentence):
         self.sentence = sentence
 
-
-    def capture_regular_expression(self, sentence): # One block that does everything almost
-        """method that captures location in 
-        string, regular expression"""
+    def capture_regular_expression(self, sentence): 
+        # One block that does everything
+        """method that captures location in string, regular expression"""
 
         sentence = str(sentence)
 
@@ -22,6 +21,7 @@ class Parser:
         self.address = address
 
         return self.address
+
 
 def main():
     pass

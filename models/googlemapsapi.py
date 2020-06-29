@@ -62,7 +62,7 @@ class GoogleMaps:
         return self.longitude[0]
 
     def get_clean_position(self):
-        """Method to get positions numbers lat and lng"""
+        """Method to get the position in numbers lat and lng"""
 
         geopoint = Location(self.latitude[0], self.longitude[0])
         self.geopoint = geopoint

@@ -12,6 +12,7 @@ unidecode = "*"
 python-dotenv = "*"
 requests = "*"
 requests-mock = "*"
+flask = "*"
 
 [requires]
 python_version = "3.7"
