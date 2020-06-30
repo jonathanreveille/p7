@@ -1,0 +1,137 @@
+body{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+section{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction : column;
+    align-content: space-around;
+}
+
+#user-text-form{
+    justify-content:center;
+    width:400px;
+    height:50px;
+    margin: 200px 10px 100px 10px;
+    border: solid black 1px;
+    border-radius: 10px;
+    padding: 16px 10px 10px 16px    
+}
+
+.input--usertext{
+    width:300px;
+    background-color : rgb(206, 235, 173);
+    color: black;
+}
+
+
+.navbar{
+    position: fixed;
+    display:flex;
+    flex-direction: row;
+    flex-wrap:wrap;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(34, 7, 83, 0.952);
+    padding:16px;
+    width:100%;
+    height: auto;
+    z-index: 1
+}
+
+.navbar ul{
+    display:flex;
+    align-items:center;
+    flex-wrap: wrap;
+    list-style-type: none;
+}
+
+.navbar ul li a{
+    color:whitesmoke;
+    padding:12px
+}
+
+.navbar ul li a:hover{
+    background-color: whitesmoke;
+    color: palevioletred;
+    border-radius:5px
+}
+
+.nav{
+    display:flex;
+    justify-content:right;
+    list-style:none;
+}
+
+.logo{
+    flex: 1 1 auto;
+    margin-left:1%;
+    text-transform: uppercase;
+    letter-spacing:1px;
+    font-weight: bold;
+    font-size: 35px;
+    color:#51d4c5
+}
+
+.spaceformenu{
+    margin-top: 145px;
+}
+
+.about-area{
+    display:flex;
+    position:relative;
+    justify-content:space-around;
+    align-items: center;
+    flex-wrap:wrap;
+    flex-direction:row;
+    width:600px;
+    height:110px;
+    padding:10px;
+    margin: 10px;
+    text-align: center
+}
+/* 
+
+@media all and (max-width:375px) 
+{
+    .artiste{
+        display:flex;
+        flex-direction:column;
+        align-content:space-between;
+        flex-wrap:wrap;
+        height:auto;
+        width:80%;
+        align-items:center;
+        justify-content:center;
+    }
+
+    .banner-area{
+        display:none
+    }
+} */
+        
+/* conteneur */
+footer{
+    display:flex;
+    width:100%;
+    height:auto;
+    padding: 10px 10px 10px 10px;
+    justify-content: center;
+    align-items: center;
+    background:purple
+}
+
+.copyright{
+    font-family:"sinkin_sans400_regular";
+    margin: 20px 20px 20px 20px;
+    padding:10px 10px 10px 10px;
+    text-align: center;
+}
+
+.spaceformenu{
+    margin: 800px 0px 400px 0px
+}
+
