@@ -1,16 +1,15 @@
-# Nous utiliserons ce fichier pour traiter les 
+# Nous utiliserons ce fichier pour traiter les
 # donnés que nous allons récupérer avec le navigateur
 # grâce à JS et ses méthodes.
-from models.parser import Parser
 
 def transform_to_upper(text):
-    """ une méthode test pour vérifier qu'on 
+    """ une méthode test pour vérifier qu'on
     agit bien sur la string reçu de l'utilisateur
     et on la renvoie en majuscule"""
-    
+
     print(text)
     return {
-        "text-original":text,
+        "text-original": text,
         "text-transformed": text.upper()
     }
 

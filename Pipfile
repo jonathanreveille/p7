@@ -6,6 +6,8 @@ verify_ssl = true
 [dev-packages]
 python-dotenv-run = "*"
 pytest = "*"
+flake8 = "*"
+autopep8 = "*"
 
 [packages]
 unidecode = "*"

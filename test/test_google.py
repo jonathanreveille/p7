@@ -1,14 +1,15 @@
 #! /usr/bin/env python3
 # coding : utf-8
 
-import pytest
+# import pytest
 from models.googlemapsapi import GoogleMaps
 
 
 def test_get_json():
     """ we will if output is dictionary type"""
     g = GoogleMaps("Tour Eiffel")
-    assert type(g.get_json()) == dict
+    assert isinstance(g.get_json(), dict)
+
 
 def test_get_geocode():
     """ we will test if we the right coordinates
@@ -17,20 +18,22 @@ def test_get_geocode():
     g.get_json()
     assert g.get_geocode() == {'lat': 48.8606111, 'lng': 2.337644}
 
+
 def test_google_api_response(monkeypatch):
     IMITATION_RESPONSE = {'locations': [{'Position': 'Position'}]}
     # ^Remplacer par la structure de donnée désirée
-    
+
     class MockRequestsGet:
         def __init__(self, url, params=None):
             pass
+
         def json(self):
             return IMITATION_RESPONSE
 
     response = MockRequestsGet
     path = "models.googlemapsapi.GoogleMaps.get_json"
     monkeypatch.setattr(path, response.json)
-    
+
     assert response.json(IMITATION_RESPONSE) == IMITATION_RESPONSE
 
 
@@ -45,8 +48,8 @@ def test_google_api_response(monkeypatch):
 #     assert "data" == requests.get('http://test.com').text
 
 # def test_get_response(monkeypatch):
-#     response = {'locations': [{'Position': 'locations'}]} 
-    
+#     response = {'locations': [{'Position': 'locations'}]}
+
 #     class MockRequestsGet:
 #         def __init__(self, url, params=None):
 #             self.status_code = 200
@@ -77,4 +80,3 @@ def test_google_api_response(monkeypatch):
 
 #     monkeypatch.setattr("models.googlemapsapi.get_geocode",  MockRequestsGet)
 #     assert mock_geocode(responses) == responses
-
