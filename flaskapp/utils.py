@@ -4,6 +4,10 @@
 from models.parser import Parser
 
 def transform_to_upper(text):
+    """ une méthode test pour vérifier qu'on 
+    agit bien sur la string reçu de l'utilisateur
+    et on la renvoie en majuscule"""
+    
     print(text)
     return {
         "text-original":text,

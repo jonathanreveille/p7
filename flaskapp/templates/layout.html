@@ -5,13 +5,15 @@
     {% block head %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type='text/css' href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" href="data:,">
+    <!-- ^^^pour eviter "GET /favicon.ico HTTP/1.1" 404 - -->
 
-    {% if title %}
-        <title>GrandPy - {{title}} </title>
-    {% else %}
-        <title>GrandPy</title>
-    {% endif%}
+        {% if title %}
+            <title>GrandPy - {{title}} </title>
+        {% else %}
+            <title>GrandPy</title>
+        {% endif%}
 
     {% endblock head %}
 
@@ -21,32 +23,54 @@
 <body>
 
     <header>
+
         <div class="navbar">
-            <a class=logo href="{{url_for('home')}}">GrandPy</a>
+
+            <a href="{{url_for('home')}}" class="logo">GrandPy</a>
+
             <ul class="nav">
-                <li><a href="{{url_for('about')}}">Qui est grandpy?</a></li>
+                <li><a href="{{url_for('home')}}">Rechercher</a></li>
+                <li><a href="{{url_for('about')}}">A propos</a></li>
             </ul>
         </div>
 
+        
     </header>
 
-        <section>
+        <section class="flexbox">       
+
+            <div class="interactionbox">
             {%block content%}
             
             {% endblock content %}
+            </div>
+
         </section>
     
+        <!-- <section class="flexbox"> -->
 
-    <div class="spaceformenu"> </div>
+            <footer class="contenaire">
+
+                <div class="copyright">
+
+                    <h2>©Copyright - Projet 7 Openclassrooms - Jonathan R.</h2>
+
+                </div> 
+
+                <div class="icons">
+
+                    <p>
+                        <img src="./static/image/python.png" alt="icone" />
+                        <img src="./static/image/htmlcssjs.png" alt="icone" />
+                        <img src="./static/image/flask.png" alt="icone" />
+                    </p>
+
+                </div> 
+
+            </footer>
+            
+        <!-- </section> -->
         
-    <footer>
+    </body>
 
-        <div class="copyright">
-            <h2>©Copyright - Project 7 Openclassrooms - Jonathan R.</h2>
-        </div>
-
-    </footer>
-    
-</body>
-
-</html>
+</html> 

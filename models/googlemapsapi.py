@@ -31,7 +31,14 @@ class GoogleMaps:
         """Returns coordinates json dict
         from the requests of address"""
 
-        self.search_req = requests.get(self.search_url, params=self.params)
+        try:
+            self.search_req = requests.get(self.search_url, params=self.params)
+            self.search_req.raise_for_status() #quand on recoit autre que status 200, ça génére une exception HTTPError
+        
+        except requests.exceptions.RequestException:
+            self.search_json={}
+            return self.search_json
+
 
         connexion = True
         if not connexion:
@@ -45,6 +52,9 @@ class GoogleMaps:
     def get_geocode(self):
         """method to get only the information we need from json"""
 
+        if not self.search_json:
+            return None
+
         self.location = self.search_json["results"][0]["geometry"]["location"]
         return self.location
         #get in output lat & lng from json, type dict.
@@ -52,11 +62,17 @@ class GoogleMaps:
     def get_latitude(self):
         """Method to isolate latitude"""
 
+        if not self.search_json:
+            return None
+
         self.latitude.append(self.location.get("lat"))
         return self.latitude
 
     def get_longitude(self):
         """Method to isolate longitude"""
+        
+        if not self.search_json:
+            return None
 
         self.longitude.append(self.location.get("lng"))
         return self.longitude[0]
