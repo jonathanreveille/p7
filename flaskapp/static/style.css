@@ -102,14 +102,19 @@ footer, .contenaire{
 }
 
 .copyright{
-    margin-top:40px;
+    margin-top:20px;
     color:whitesmoke;
     text-align:center;
 }
 
 .icons{
     display:flex;
-    flex-flow:column wrap;
+    flex-flow:column nowrap;
+    border: black 3px solid
+}
+
+.icon-area img{
+    margin-bottom:20px;
 }
 
 
@@ -150,6 +155,16 @@ footer, .contenaire{
 
     .copyright{
         font-size: 0.8em;
+    }
+
+    .icons{
+        width:35px;
+        flex-flow:column wrap;
+        justify-content: space-evenly;
+    }
+
+    .icon-area img{
+        width:50px;
     }
 }
 
