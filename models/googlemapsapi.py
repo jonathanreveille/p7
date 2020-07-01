@@ -87,8 +87,14 @@ class GoogleMaps:
 
         geopoint = Location(self.latitude[0], self.longitude[0])
         self.geopoint = geopoint
+        print(self.geopoint)
         return self.geopoint
 
+    # Penser à l'utilisateur qui instanciera la classe
+    # et qui choisira d'entrer une adressse et d'avoir
+    # en retour les points de géolocation directement
+    # éviter tout les appels comme dans le main actuel
+    # penser à l'ergonomie du programme
 
 def main():
     g = GoogleMaps("Musée du Louvre, Paris")

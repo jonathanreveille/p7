@@ -66,7 +66,7 @@ class MediaWiki:
             "prop": "extracts|info",  # Choix des propriétés pour les pages requises
             # Fournit une URL complète, une URL de modification, et l’URL
             # canonique de chaque page.
-            "inprop": "url",
+            "inprop": "url", #il faut que je récupère ça pour l'afficher sur mon siteweb
             "exchars": 1200,  # Nombre de caractères à retourner
             # Renvoyer du texte brut (éliminer les balises de markup)
             "explaintext": 1,
@@ -96,6 +96,12 @@ class MediaWiki:
             page)]["extract"]
 
         return self.summary
+
+    # Penser à l'utilisateur qui instanciera la classe
+    # et qui choisira d'entrer une adressse et d'avoir
+    # en retour les points de géolocation directement
+    # éviter tout les appels comme dans le main actuel
+    # penser à l'ergonomie du programme (GMaps et MWiki)
 
 
 def main():
