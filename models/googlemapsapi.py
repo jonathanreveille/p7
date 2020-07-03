@@ -97,7 +97,7 @@ class GoogleMaps:
     # penser à l'ergonomie du programme
 
 def main():
-    g = GoogleMaps("Musée du Louvre, Paris")
+    g = GoogleMaps("Musée du Louvre")
     g.get_json()
     g.get_geocode()
     g.get_latitude()

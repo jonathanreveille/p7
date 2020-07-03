@@ -53,8 +53,13 @@ a:hover{
     margin:auto;
     align-items:stretch;
     justify-content:center;
-    flex-grow:1 1 800px;
-    /* border: outset blue 1px; */
+}
+
+
+
+input:hover{
+    color :rgb(76, 47, 240);
+    background-color: rgb(228, 225, 225);
 }
 
 /* paragraphe */
@@ -62,13 +67,14 @@ p{
     padding:30px;
     margin: 10px;
     border-radius: 40px;
-    /* border: outset rgb(9, 105, 9) 1px; */
+    border: outset rgb(9, 105, 9) 1px;
     text-align: justify;
-    font-size:1em
+    font-size:1.1rem
 }
 
 .buble0{
-    background: mediumseagreen
+    background: mediumseagreen;
+    color:white;
 }
 
 .buble1{
@@ -84,8 +90,9 @@ p{
 }
 
 .input--usertext{
-    width:300px;
-    background-color : lightgoldenrodyellow;
+    width:600px;
+    height:5em;
+    background-color : white;
     color: rgb(104, 58, 2);
 }
 
@@ -94,7 +101,6 @@ footer, .contenaire{
     display:flex;
     flex-flow: row wrap;
     padding-top:25px;
-    padding-top:20px;
     background-color: rgba(126, 123, 123, 0.753);
     border-radius:40px;
     height:auto;
@@ -110,15 +116,12 @@ footer, .contenaire{
 .icons{
     display:flex;
     flex-flow:column nowrap;
-    border: black 3px solid
+    /* border: green 3px solid */
 }
 
 .icon-area img{
     margin-bottom:20px;
 }
-
-
-
 
 /* NAVIGATION MENU */
 
@@ -133,7 +136,7 @@ footer, .contenaire{
     height: auto;
 }
 
-
+/* for smaller screens */
 @media all and (max-width: 600px) {
     .navbar{
         display:flex;
@@ -158,7 +161,7 @@ footer, .contenaire{
     }
 
     .icons{
-        width:35px;
+        width:160px;
         flex-flow:column wrap;
         justify-content: space-evenly;
     }
@@ -166,6 +169,7 @@ footer, .contenaire{
     .icon-area img{
         width:50px;
     }
+
 }
 
 .navbar ul{
@@ -177,7 +181,7 @@ footer, .contenaire{
 
 .navbar ul li a{
     color:whitesmoke;
-    padding:12px
+    padding:12px;
 }
 
 .navbar ul li a:hover{
@@ -185,6 +189,7 @@ footer, .contenaire{
     color: palevioletred;
     border-radius:5px;
     align-items:center;
+    cursor: pointer;
 }
 
 .nav{
@@ -204,3 +209,7 @@ footer, .contenaire{
     color:#353fce
 }
 
+
+textarea{
+    width: 600px
+}

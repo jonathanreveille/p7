@@ -4,6 +4,7 @@
 import requests
 import pprint as go
 
+nomdevariable = "Valeur donnée"
 
 class MediaWiki:
     """class that will interact with MediaWiki API
@@ -11,15 +12,13 @@ class MediaWiki:
 
     def __init__(self, latitude, longitude):
 
+        self.latitude = latitude
+        self.longitude = longitude
         self.search_json = dict()
         self.pageid = int()
         self.title = str()
         self.params_extract = dict()
-
         self.url = "https://fr.wikipedia.org/w/api.php"
-
-        latitude = 37.786971  # to_test_1
-        longitude = -122.399677  # to_test_2
 
         self.params = {
             "format": "json",  # format de la réponse
@@ -105,8 +104,9 @@ class MediaWiki:
 
 
 def main():
-    latitude = 37.78785
-    longitude = -122.40065
+    
+    latitude = 46.8077191
+    longitude = 7.159642
     m = MediaWiki(latitude, longitude)
     m.get_json()
     m.get_title()
