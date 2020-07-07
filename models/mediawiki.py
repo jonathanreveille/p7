@@ -3,17 +3,26 @@
 
 import requests
 import pprint as go
+from models.googlemapsapi import GoogleMaps
 
-nomdevariable = "Valeur donnée"
 
 class MediaWiki:
     """class that will interact with MediaWiki API
     with requests"""
 
     def __init__(self, latitude, longitude):
+        
+        ###ORIGINAL###
+        # self.googlemaps = GoogleMaps
+        # self.positions = self.googlemaps.coords
+
+        # for position in self.positions:
+        #     self.latitude = self.positions[0]
+        #     self.longitude = self.positions[1]
 
         self.latitude = latitude
         self.longitude = longitude
+
         self.search_json = dict()
         self.pageid = int()
         self.title = str()
@@ -82,8 +91,7 @@ class MediaWiki:
         else:
             # give us in ouput json object details
             self.extracted_data = self.extract_response.json()
-            go.pprint(self.extracted_data)
-
+            #go.pprint(self.extracted_data)
             return self.extracted_data
 
     def extract_summary(self):
@@ -93,8 +101,35 @@ class MediaWiki:
         page = self.page_id
         self.summary = self.extracted_data["query"]["pages"][str(
             page)]["extract"]
-
+        # print(self.summary)
         return self.summary
+
+    def extract_fullurl(self):
+        """method that takes the fullurl from
+        mediawiki if the user wants to learn
+        more information"""
+
+        page = self.page_id
+        self.fullurl = self.extracted_data["query"]["pages"][str(
+            page)]["fullurl"]
+        # print(self.fullurl)
+        return self.fullurl
+
+
+    def start_engine_mediawiki(self):
+        """method that is friendly user for use of 
+        the application"""
+        
+        running = True
+        
+        if running:
+            self.get_json()
+            self.get_title()
+            self.get_page_id()
+            self.get_short_description_from_pageid()
+            self.extract_summary()
+            self.extract_fullurl()
+
 
     # Penser à l'utilisateur qui instanciera la classe
     # et qui choisira d'entrer une adressse et d'avoir
@@ -105,18 +140,28 @@ class MediaWiki:
 
 def main():
     
-    latitude = 46.8077191
-    longitude = 7.159642
-    m = MediaWiki(latitude, longitude)
-    m.get_json()
-    m.get_title()
-    m.get_page_id()
-    m.get_short_description_from_pageid()
-    m.extract_summary()
+    ## PARTIE AVEC LE PARSER 
+    ## CREER PARSER, PRENDRE LA PHRASE, FAIRE USINE
+    ## ACCEDER A L ATTRIBUT SENTENCE DE PARSER ET 
+    ## INSERER DANS LE PARAMETRE DE GOOGLEMAPS CLASS
+    g = GoogleMaps("Le musée d'Art Moderne de Paris")
+    g.start_engine_google_maps()s
+    m = MediaWiki(g.latitude, g.longitude)
+    m.start_engine_mediawiki()
 
 
 if __name__ == "__main__":
     main()
+
+
+    ### REFACTORING THIS UNDER ###
+    # m.get_json()
+    # m.get_title()
+    # m.get_page_id()
+    # m.get_short_description_from_pageid()
+    # m.extract_summary()
+    # m.extract_fullurl()
+
 
 
 # page_id = self.page_id

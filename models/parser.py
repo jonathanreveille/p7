@@ -10,6 +10,7 @@ class Parser:
 
     def __init__(self, sentence):
         self.sentence = sentence
+        self.address = str()
 
     def get_lower_cases(self):
         """method to return sentence in lower cases"""
@@ -63,13 +64,19 @@ class Parser:
 
         return self.cleaned_sentence
 
+    def running_switch(self):
+        """ this method will launch all the
+        necessary methods in order to make it 
+        more friendly for the user of the app """
+        pass
+
     def capture_regular_expression(self, sentence):
         # One block that does everything
         """method that captures location in string, regular expression"""
 
         sentence = str(sentence)
 
-        regex = r"(l'adresse (de|du)|où est|où se situe|où se trouve|à quel endroit est|indiquer|me montrer) (?P<lieu>[^,.:;!?]+)"
+        regex = r"(l'adresse (de|du)|où est|où se situe|où se trouve|à quel endroit est|indiquer|me montrer |comment (trouver|aller))(?P<lieu>[^,.:;!?]+)"
         match = re.search(regex, sentence)
         address = match.group("lieu")  # ou group(3)
         self.address = address

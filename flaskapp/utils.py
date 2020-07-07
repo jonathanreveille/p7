@@ -2,8 +2,10 @@
 # donnés que nous allons récupérer avec le navigateur
 # grâce à JS et ses méthodes.
 
+from models.parser import Parser
+
 def transform_to_upper(text):
-    """ une méthode test pour vérifier qu'on
+    """ Une méthode test pour vérifier qu'on
     agit bien sur la string reçu de l'utilisateur
     et on la renvoie en majuscule"""
 
@@ -13,7 +15,17 @@ def transform_to_upper(text):
         "text-transformed": text.upper()
     }
 
+def find_position_of_place(text):
+    """ Returns the position of the place the usertext
+    is looking for"""
+    parser = Parser(text)
+    parser.capture_regular_expression(text)
+    address_ask_by_user = parser.address
+    return address_ask_by_user
 
+def send_to_google_maps():
+    print(address_ask_by_user)
+    
 # 1 créer une méthode pour récupérer le texte de l'user
 # 2 Isoler la phrase texte sur laquelle nous allons travailler dessus
 # 3 utiliser la méthode de Parser (class) pour regex

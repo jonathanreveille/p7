@@ -11,10 +11,9 @@ class Location:
         self.longitude = float(lng)
 
     def __repr__(self):
-        """Method that presents in first position
-        latitude, and second position the longitude of
-        a place """
-
+        """Method that shows a string of the latitude
+        and the longitude from the location we are looking
+        for"""
         return f"Location : {self.latitude}, {self.longitude}"
 
 

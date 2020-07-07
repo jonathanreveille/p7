@@ -23,39 +23,87 @@ class GoogleMaps:
         }
         self.search_json = dict()
         self.location = dict()
-        self.latitude = list()
-        self.longitude = []
-        self.geopoint = None
+        self.latitude = float()
+        self.longitude = float()
+        self.coords = list()
 
-    def get_json(self):
+############################################
+######## METHODS AFTER REFACTORING #########
+############################################
+
+    def receive_json(self): # REFACTORING
         """Returns coordinates json dict
         from the requests of address"""
 
         try:
             self.search_req = requests.get(self.search_url, params=self.params)
-            # quand on recoit autre que status 200, ça génére une exception
-            # HTTPError
-            self.search_req.raise_for_status()
+            # quand on recoit autre que status 200, ça génére une exception HTTPError
+            return self.search_req.raise_for_status()
 
         except requests.exceptions.RequestException:
             self.search_json = {}
             return self.search_json
+        
+    def search_geocode(self): # REFACTORING
+        """A method to retrieve only the information 
+        we need from json"""
 
+        self.search_json = self.search_req.json()
+        self.location = self.search_json["results"][0]["geometry"]["location"]
+        
+        return self.location # get in output lat & lng from json, type dict.
+
+
+    def find_positions(self):
+        """method that creates lat, lng coordinates for use
+        with Mediawiki"""
+
+        lat = list()
+        lng = list()
+        lat.append(self.location.get("lat")) # output a list
+        lng.append(self.location.get("lng")) # output a list
+
+        self.latitude = lat[0]
+        self.longitude = lng[0]
+        self.coords.append(self.latitude) 
+        self.coords.append(self.longitude)
+
+        return self.latitude, self.longitude, self.coords
+
+    def start_engine_google_maps(self):
+        """method that launches the module
+        when it's activated"""
+
+        running = True
+
+        if running:
+            self.receive_json()
+            self.search_geocode()
+            self.find_positions()
+
+
+############################################
+####### METHODS BEFORE REFACTORING #########
+############################################
+
+    def get_json_test(self): #ORIGINAL
+
+        self.search_req = requests.get(self.search_url, params=self.params)
         connexion = True
-        if not connexion:
+
+        if not connexion: #Fail
             print(
                 self.search_req,
                 "/--<Failed to connect to Google Maps WebService API>")
-        else:
-            print(
-                self.search_req,
-                ">--<Connected to Google Maps Webservice API Suceed>")
+
+        else: #Success
             self.search_json = self.search_req.json()
+            return self.search_json  # this is a dict
 
-        return self.search_json  # this is a dict
 
-    def get_geocode(self):
-        """method to get only the information we need from json"""
+    def get_geocode_test(self): # ORIGINAL
+        """A method to retrieve only the information 
+        we need from json"""
 
         if not self.search_json:
             return None
@@ -64,17 +112,21 @@ class GoogleMaps:
         return self.location
         # get in output lat & lng from json, type dict.
 
-    def get_latitude(self):
-        """Method to isolate latitude"""
+
+    def get_latitude_test(self): # ORIGINAL
+        """Method to gather the longitude of the position
+        we are seeking for"""
 
         if not self.search_json:
             return None
 
-        self.latitude.append(self.location.get("lat"))
-        return self.latitude
+        self.longitude.append(self.location.get("lat"))
+        return self.latitude[0]
+        
 
-    def get_longitude(self):
-        """Method to isolate longitude"""
+    def get_longitude_test(self): # ORIGINAL
+        """Method to gather the longitude of the position
+        we are seeking for"""
 
         if not self.search_json:
             return None
@@ -82,31 +134,47 @@ class GoogleMaps:
         self.longitude.append(self.location.get("lng"))
         return self.longitude[0]
 
-    def get_clean_position(self):
-        """Method to get the position in numbers lat and lng"""
 
-        geopoint = Location(self.latitude[0], self.longitude[0])
-        self.geopoint = geopoint
-        print(self.geopoint)
-        return self.geopoint
+
+def main():
+    # FOR USE, IT'S THE FOLLOWING ORDER
+    g = GoogleMaps("Le musée d'Art Moderne de Paris")
+    g.start_engine_google_maps()
+    # pass
+
+
+if __name__ == "__main__":
+    main()
+
+
+    # def find_positions(self):
+    #     """Method to isolate latitude"""
+
+    #     if not self.search_json:
+    #         return None
+
+    #     else:
+    #         self.latitude.append(self.location.get("lat"))
+    #         self.longitude.append(self.location.get("lng"))
+    #         return self.latitude[0], self.longitude[0]
+
+
+    # def get_clean_position(self):
+    #     """Method to get the position in numbers lat and lng"""
+
+    #     geopoint = Location(self.latitude[0], self.longitude[0])
+    #     self.geopoint = geopoint
+    #     print(self.geopoint)
+    #     return self.geopoint
+
+
+
 
     # Penser à l'utilisateur qui instanciera la classe
     # et qui choisira d'entrer une adressse et d'avoir
     # en retour les points de géolocation directement
     # éviter tout les appels comme dans le main actuel
     # penser à l'ergonomie du programme
-
-def main():
-    g = GoogleMaps("Musée du Louvre")
-    g.get_json()
-    g.get_geocode()
-    g.get_latitude()
-    g.get_longitude()
-    g.get_clean_position()
-
-
-if __name__ == "__main__":
-    main()
 
 
 ##########################################################################
