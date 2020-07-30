@@ -26,6 +26,8 @@ class MediaWiki:
         self.search_json = dict()
         self.pageid = int()
         self.title = str()
+        self.fullurl = str()
+        self.summary = str()
         self.params_extract = dict()
         self.url = "https://fr.wikipedia.org/w/api.php"
 
@@ -101,7 +103,8 @@ class MediaWiki:
         page = self.page_id
         self.summary = self.extracted_data["query"]["pages"][str(
             page)]["extract"]
-        # print(self.summary)
+            
+        print(self.summary)
         return self.summary
 
     def extract_fullurl(self):
@@ -112,7 +115,8 @@ class MediaWiki:
         page = self.page_id
         self.fullurl = self.extracted_data["query"]["pages"][str(
             page)]["fullurl"]
-        # print(self.fullurl)
+
+        print("Pour plus d'information:", self.fullurl)
         return self.fullurl
 
 
@@ -131,13 +135,6 @@ class MediaWiki:
             self.extract_fullurl()
 
 
-    # Penser à l'utilisateur qui instanciera la classe
-    # et qui choisira d'entrer une adressse et d'avoir
-    # en retour les points de géolocation directement
-    # éviter tout les appels comme dans le main actuel
-    # penser à l'ergonomie du programme (GMaps et MWiki)
-
-
 def main():
     
     ## PARTIE AVEC LE PARSER 
@@ -145,13 +142,24 @@ def main():
     ## ACCEDER A L ATTRIBUT SENTENCE DE PARSER ET 
     ## INSERER DANS LE PARAMETRE DE GOOGLEMAPS CLASS
     g = GoogleMaps("Le musée d'Art Moderne de Paris")
-    g.start_engine_google_maps()s
+    g.start_engine_google_maps()
+
     m = MediaWiki(g.latitude, g.longitude)
     m.start_engine_mediawiki()
 
 
 if __name__ == "__main__":
     main()
+
+
+
+    # Penser à l'utilisateur qui instanciera la classe
+    # et qui choisira d'entrer une adressse et d'avoir
+    # en retour les points de géolocation directement
+    # éviter tout les appels comme dans le main actuel
+    # penser à l'ergonomie du programme (GMaps et MWiki)
+
+
 
 
     ### REFACTORING THIS UNDER ###

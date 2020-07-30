@@ -27,7 +27,19 @@ positive_answers = [
 
 
 STOP_WORDS = [
+    "Salut",
+    "Grandpy",
+    "J'espère",
+    "j'espère",
+    "J'espere",
+    "j'espere",
+    "espere",
+    "je",
+    "voulais",
+    "veux",
+    "peux",
     "a",
+    "à",
     "trouve",
     "ou",
     "se",

@@ -8,15 +8,15 @@ from models.googlemapsapi import GoogleMaps
 def test_get_json():
     """ we will if output is dictionary type"""
     g = GoogleMaps("Tour Eiffel")
-    assert isinstance(g.get_json(), dict)
+    assert isinstance(g.get_json_test(), dict)
 
 
 def test_get_geocode():
     """ we will test if we the right coordinates
     from a place"""
     g = GoogleMaps("Le Louvres")
-    g.get_json()
-    assert g.get_geocode() == {'lat': 48.8606111, 'lng': 2.337644}
+    g.get_json_test()
+    assert g.get_geocode_test() == {'lat': 48.8606111, 'lng': 2.337644}
 
 
 def test_google_api_response(monkeypatch):
@@ -31,7 +31,7 @@ def test_google_api_response(monkeypatch):
             return IMITATION_RESPONSE
 
     response = MockRequestsGet
-    path = "models.googlemapsapi.GoogleMaps.get_json"
+    path = "models.googlemapsapi.GoogleMaps.get_json_test"
     monkeypatch.setattr(path, response.json)
 
     assert response.json(IMITATION_RESPONSE) == IMITATION_RESPONSE

@@ -53,4 +53,4 @@ def test_capture_regular_expression():
     sentence = "Salut grandpy! Comment s'est passé ta soirée avec Grandma hier soir? Au fait, pendant que j'y pense, pourrais-tu m'indiquer où se trouve le musée d'art et d'histoire de Fribourg, s'il te plaît?"
     p = Parser(sentence)
     assert p.capture_regular_expression(
-        sentence) == "où se trouve le musée d'art et d'histoire de Fribourg"
+        sentence) == " où se trouve le musée d'art et d'histoire de Fribourg"

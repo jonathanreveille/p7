@@ -1,7 +1,7 @@
 from flask import render_template, jsonify, request
 from . import app
 
-from .utils import transform_to_upper, find_position_of_place
+from .utils import find_place_in_sentence, find_geocoords_with_google_maps
 
 # Créer la route de base
 @app.route("/")
@@ -15,6 +15,68 @@ def about():
     return render_template("about.html", title="About")
 
 
+@app.route("/ajax", methods=["POST"])
+def ajax():
+
+    data = {"status": False}
+
+    user_text = request.data.decode()
+    response = find_place_in_sentence(user_text)
+
+    if not response:
+        data = {"status": False,
+                "question":user_text,
+                "answer": "Désolé, je n'ai pas trouvé"
+                }
+
+    if response:
+        all_text, url = find_geocoords_with_google_maps(response)
+        data = {"status" : True,
+                "location" : response,
+                "article" : all_text,
+                "answer": "C'est bon j'ai trouvé mon grand",
+                "url":url
+                }
+
+    return jsonify(data)
+
+    
+    # data = {"status": False}
+
+    # user_text = request.data.decode()
+    # response = find_place_in_sentence(user_text)
+
+    # if not response:
+    #     data = {"status": False,
+    #             "question":user_text,
+    #             "answer": "Désolé, je n'ai pas trouvé"
+    #             }
+
+    # if response:
+    #     all_text, url = find_geocoords_with_google_maps(response)
+    #     data = {"status" : True,
+    #             "location" : response,
+    #             "article" : all_text,
+    #             "answer": "C'est bon j'ai trouvé mon grand",
+    #             "url":url
+    #             }
+    #     answer = data
+    # return jsonify(data)
+
+
+# NORMAL
+# @app.route("/ajax", methods=["POST"])
+# def ajax():
+#     user_text = request.data.decode()
+#     response = find_place_in_sentence(user_text)
+#     print(response) # string
+#     return jsonify(response)
+
+
+
+
+# geocoords = find_geocoords_with_google_maps(response)
+# summary = get_back_info_mediawiki()
 # @app.route("/ajax", methods=["POST"])
 # def ajax():
     """Récupérer les données du navigateur par l'utilisateur"""
@@ -26,11 +88,6 @@ def about():
 
     # c'est un dic
 
-@app.route("/ajax", methods=["POST"])
-def ajax():
-    user_text = request.data.decode()
-    response = find_position_of_place(user_text)
-    return jsonify(response)
 
 
 # ^^^EXPLICATIONS^^^

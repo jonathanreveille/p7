@@ -68,11 +68,12 @@ class GoogleMaps:
         self.coords.append(self.latitude) 
         self.coords.append(self.longitude)
 
+        print("Lat:",self.latitude,",Longitude:",self.longitude,",Set:",self.coords)
         return self.latitude, self.longitude, self.coords
 
     def start_engine_google_maps(self):
-        """method that launches the module
-        when it's activated"""
+        """method that launches the the object class
+        when it is activated"""
 
         running = True
 
@@ -137,10 +138,11 @@ class GoogleMaps:
 
 
 def main():
+    pass
+
     # FOR USE, IT'S THE FOLLOWING ORDER
     g = GoogleMaps("Le musée d'Art Moderne de Paris")
     g.start_engine_google_maps()
-    # pass
 
 
 if __name__ == "__main__":
