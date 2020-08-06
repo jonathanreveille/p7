@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 
 # loading environment variables
 load_dotenv()
-SECRET_KEY = os.getenv("SECRET_KEY")
+SECRET_KEY = os.getenv("SECRET_KEY_BACK")
 
 
 class GoogleMaps:

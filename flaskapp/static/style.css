@@ -55,6 +55,10 @@ a:hover{
     justify-content:center;
 }
 
+#map {
+    height: 400px;  /* The height is 400 pixels */
+    width: 50%;  /* The width is the width of the web page */
+   }
 
 input:hover{
     color :rgb(76, 47, 240);
@@ -72,21 +76,10 @@ p{
 }
 
 .buble0{
-    background: mediumseagreen;
-    color:white;
+    /* background: mediumseagreen; */
+    color:black;
 }
 
-.buble1{
-    background: lightgreen
-}
-
-.buble2{
-    background: mediumaquamarine
-}
-
-.buble3{
-    background: rgb(75, 151, 126)
-}
 
 .input--usertext{
     width:600px;

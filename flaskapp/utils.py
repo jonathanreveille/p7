@@ -5,6 +5,8 @@
 from models.parser import Parser
 from models.googlemapsapi import GoogleMaps
 from models.mediawiki import MediaWiki
+from config.constant import positive_answers, negative_answers
+from random import *
 
 
 def find_place_in_sentence(text):
@@ -25,10 +27,52 @@ def find_geocoords_with_google_maps(location):
     mw.start_engine_mediawiki()
 
     summary = mw.summary
-    url = mw.url
+    url = mw.fullurl
+    latitude = mw.latitude
+    longitude = mw.longitude
 
-    return summary, url
+    return summary, url, latitude, longitude
 
+
+def generate_positive_answer():
+    """this method will take randomly 
+    a positive answer for Grandpy's reply"""
+
+    positive_answer = choice(positive_answers)
+    return positive_answer
+    
+
+def generate_negative_answer():
+    """this method will take randomly 
+    a negative answer for Grandpy's reply"""
+    
+    negative_answer = choice(negative_answers)
+    return negative_answer
+
+
+if __name__ == "__main__":
+    generate_positive_answer()
+    generate_negative_answer()
+
+# def find_coords(location):
+
+#     gm = GoogleMaps(location)
+#     gm.start_engine_google_maps()
+
+#     latitude = gm.latitude
+#     longitude = gm.longitude
+
+#     return latitude, longitude
+
+# def find_summary(**kwargs):
+
+#     mw = MediaWiki(latitude, longitude)
+#     mw.start_engine_mediawiki()
+
+#     summary = mw.summary
+#     url = mw.url
+
+#     return summary, url
 
 # 1 créer une méthode pour récupérer le texte de l'user
 # 2 Isoler la phrase texte sur laquelle nous allons travailler dessus

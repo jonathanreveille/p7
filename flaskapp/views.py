@@ -1,13 +1,20 @@
 from flask import render_template, jsonify, request
 from . import app
 
-from .utils import find_place_in_sentence, find_geocoords_with_google_maps
+from .utils import find_place_in_sentence, find_geocoords_with_google_maps, generate_positive_answer, generate_negative_answer
+
+import os
+from dotenv import load_dotenv
+# loading environment variables
+load_dotenv()
+API_KEY_FRONT= os.getenv("SECRET_KEY_FRONT")
+
 
 # Créer la route de base
 @app.route("/")
 @app.route("/home")
 def home():
-    return render_template("index.html", title="Home")
+    return render_template("index.html", title="Home", API_KEY=API_KEY_FRONT )
 
 # Créer l'onglet about
 @app.route("/about")
@@ -26,16 +33,18 @@ def ajax():
     if not response:
         data = {"status": False,
                 "question":user_text,
-                "answer": "Désolé, je n'ai pas trouvé"
+                "answer": generate_negative_answer(),
                 }
 
     if response:
-        all_text, url = find_geocoords_with_google_maps(response)
+        all_text, url, latitude, longitude = find_geocoords_with_google_maps(response)
         data = {"status" : True,
                 "location" : response,
                 "article" : all_text,
-                "answer": "C'est bon j'ai trouvé mon grand",
-                "url":url
+                "answer": generate_positive_answer(),
+                "url":url,
+                "latitude" : latitude,
+                "longitude" : longitude,
                 }
 
     return jsonify(data)

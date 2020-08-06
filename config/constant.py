@@ -17,12 +17,12 @@ negative_answers = [
 
 
 positive_answers = [
-    "Ah tu as bien de la chance que j'ai une mémoire d'éléphant ! Je vais te dire tout ça mon petit, laisse moi voir par où je commence",
-    "ça tombe bien ! Nous nous sommes déplacés avec Grandmy quand nous étions jeune. Je me rappelle certaines choses, laisse moi te le ranconter",
-    "Je me souviens comme si c'était hier...voici d'autres informations pour ta question jeunot",
-    "Quand l'heure de souper arrivera, je ne pourrais pas tout t'expliquer car j'aurai la tête ailleur, écoutes donc cette histoire en guise de réponse"
-    "C'était ton père qui adorait cet endroit, drôle de vie ! Laisse moi te raconter en détails comment c'était selon mes souvenirs bien lointain",
-    "J'ai épousé ta mamie proche de ce lieux, nous y sommes passés en charette juste avant. Laisse  moi  donc te raconter tout ça."
+    "Ah tu as bien de la chance que j'ai une mémoire d'éléphant ! Je vais te dire tout ça mon petit, laisse moi voir par où je commence...",
+    "ça tombe bien ! Nous nous sommes déplacés avec Grandmy quand nous étions jeune. Je me rappelle certaines choses, laisse moi te le ranconter...",
+    "Je me souviens comme si c'était hier...voici d'autres informations pour ta question jeunot...",
+    "Quand l'heure de souper arrivera, je ne pourrais pas tout t'expliquer car j'aurai la tête ailleur, lis donc cette histoire en guise de réponse..."
+    "C'était ton père qui adorait cet endroit, drôle de vie ! Laisse moi te raconter en détails comment c'était selon mes souvenirs bien lointain...",
+    "J'ai épousé ta mamie proche de ce lieux, nous y sommes passés en charette juste avant. Laisse moi donc te décrire ce lieu..."
 ]
 
 
