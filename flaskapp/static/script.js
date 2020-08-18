@@ -13,23 +13,23 @@ function createDiv(text, parent, id, type) {
     return div
 }
 
+
 // NEW FONCTION : CREATE A LINK INTO AND APPENDCHILD INTO THE DOM
 function createLink(parent, id, type, url) {
     let link = document.createElement(type);
     link.id = id;
     link.href = url;
-    link.textContent = url;
+    link.textContent = url; 
     link.target = "_blank"
-    parent.appendChild(link);
+    parent.appendChild(link)
     return link
 }
-
 
 // Initialize and add the map
 function initMap(location, latitude, longitude, maps) {
     // The location of REIMS
 
-    var latLng = {lat: latitude, lng: longitude};
+    var position = {lat: latitude, lng: longitude};
     var location = {
       lat: latitude,
       lng: longitude    
@@ -43,8 +43,8 @@ function initMap(location, latitude, longitude, maps) {
       });
     // The marker, positioned at REIMS
     var marker = new google.maps.Marker({
-      position: latLng,
-      map: maps
+      position: position,
+      setMap: maps
     });
   }
 
@@ -66,33 +66,17 @@ async function postFormData (url, data, headers) {
 
 
 form.addEventListener("submit", function (event) {
-    event.preventDefault();
+  event.preventDefault();
 
-    // Envoyer le contenu du formulaire au serveur
-    postFormData("/ajax", document.querySelector('#userText').value, {
-        "Content-Type": "plain/text"
-        })
-        .then(response => {
-            createDiv(response.answer, chatbox, "chatbox", "p")
-            createDiv(response.article, chatbox, "chatbox", "p")
-            createDiv("Pour plus d'info: ", link, "linke", "p")
-            createLink(linke, "link", "a", response.url)
-            initMap(response.location, response.latitude, response.longitude, "map")
-            })
-        })
-
-                // .then(response => {console.log(response)}
-
-
-        
-// Voir le résultat dans la console avec les outils de navigateur
-// on veut créer des nouveaux éléments dans le DOM
-
-    // let chatbox = document.querySelector("#chatbox")
-    // createDiv(response, chatbox);
-    // })
-
-    // on créer une div qui permet de chatbox lors du SUBMIT
-
-
-
+  // Envoyer le contenu du formulaire au serveur
+  postFormData("/ajax", document.querySelector('#userText').value, {
+      "Content-Type": "plain/text"
+      })
+      .then(response => {
+          createDiv(response.answer, chatbox, "chatbox", "p")
+          createDiv(response.article, chatbox, "chatbox", "p")
+          createDiv("Pour plus d'info: ", link, "linke", "p")
+          createLink(linke, "link", "a", response.url)
+          initMap(response.location, response.latitude, response.longitude, "map")
+          })
+      })

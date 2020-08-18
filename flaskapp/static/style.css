@@ -72,14 +72,13 @@ p{
     border-radius: 40px;
     border: outset rgb(9, 105, 9) 1px;
     text-align: justify;
-    font-size:1.1rem
+    font-size:1.1rem;
 }
 
 .buble0{
     /* background: mediumseagreen; */
     color:black;
 }
-
 
 .input--usertext{
     width:600px;
