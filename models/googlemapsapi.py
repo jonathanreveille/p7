@@ -43,15 +43,29 @@ class GoogleMaps:
         except requests.exceptions.RequestException:
             self.search_json = {}
             return self.search_json
-        
+
+
     def search_geocode(self): # REFACTORING
         """A method to retrieve only the information 
         we need from json"""
 
         self.search_json = self.search_req.json()
-        self.location = self.search_json["results"][0]["geometry"]["location"]
+        try:
+            self.location = self.search_json["results"][0]["geometry"]["location"]
+        except IndexError:
+            raise(IndexError, "No geocoords because location could not be found!")
         
         return self.location # get in output lat & lng from json, type dict.
+
+    # def search_geocode(self): # REFACTORING
+    #     """A method to retrieve only the information 
+    #     we need from json"""
+
+    #     self.search_json = self.search_req.json()
+        
+    #     self.location = self.search_json["results"][0]["geometry"]["location"]
+        
+    #     return self.location # get in output lat & lng from json, type dict.
 
 
     def find_positions(self):
@@ -71,11 +85,11 @@ class GoogleMaps:
         print("Lat:",self.latitude,",Longitude:",self.longitude,",Set:",self.coords)
         return self.latitude, self.longitude, self.coords
 
-    def start_engine_google_maps(self):
+    def start_engine_google_maps(self, start):
         """method that launches the the object class
         when it is activated"""
 
-        running = True
+        running = start
 
         if running:
             self.receive_json()

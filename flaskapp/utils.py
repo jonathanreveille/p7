@@ -20,8 +20,9 @@ def find_place_in_sentence(text):
 def find_geocoords_with_google_maps(location):
     """ Method that will use GM to find 
     coordinates of the position """
+    
     gm = GoogleMaps(location)
-    gm.start_engine_google_maps()
+    gm.start_engine_google_maps(start="True")
 
     mw = MediaWiki(gm.latitude, gm.longitude)
     mw.start_engine_mediawiki()

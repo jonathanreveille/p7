@@ -24,12 +24,16 @@
 
     <header>
 
+
         <div class="navbar">
 
-            <a href="{{url_for('home')}}" class="logo">GrandPy</a>
+        <div id="logos">
+            <img src="./static/image/grandpy.png"  alt="Logo Grandpy"/>
+        </div>
+
+            <a href="{{url_for('home')}}" class="logo">GrandPy raconte...</a>
 
             <ul class="nav">
-                <li><a href="{{url_for('home')}}">Rechercher</a></li>
                 <li><a href="{{url_for('about')}}">A propos</a></li>
             </ul>
         </div>
@@ -53,7 +57,10 @@
 
                 <div class="copyright">
 
-                    <h2>©Copyright - Projet 7 Openclassrooms - Jonathan R.</h2>
+                <h2>
+                    <a href="https://github.com/jonathanreveille/p7" target=_blank>Github </a>
+                    - Projet 7 Openclassrooms - Jonathan R.
+                </h2>
 
                 </div> 
 

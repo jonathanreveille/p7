@@ -3,26 +3,35 @@
 // avec document.querySelector("#nom_de_class_ou_id")
 
 let form = document.querySelector("#user-text-form");
+let chatbox = document.querySelector("#chatbox");
+
 
 // NEW FUNCTION : CREATE ELEMENT AND APPENDCHILD INTO THE DOM
-function createDiv(text, parent, id, type) {
+function createDiv(text, parent, type) {
     let div = document.createElement(type);
-    div.id = id;
     div.textContent = text;
     parent.appendChild(div);
     return div
 }
 
+function createDivForLink(text, parent, id, type) {
+  let div = document.createElement(type);
+  div.id  = id;
+  div.textContent = text;
+  parent.appendChild(div);
+  return div
+}
+
 
 // NEW FONCTION : CREATE A LINK INTO AND APPENDCHILD INTO THE DOM
-function createLink(parent, id, type, url) {
-    let link = document.createElement(type);
-    link.id = id;
-    link.href = url;
-    link.textContent = url; 
-    link.target = "_blank"
-    parent.appendChild(link)
-    return link
+function createLink(parent, id, type, url, text) {
+    let linky = document.createElement(type);
+    linky.id = id;
+    linky.href = url;
+    linky.textContent = text; 
+    linky.target = "_blank"
+    parent.appendChild(linky)
+    return linky
 }
 
 // Initialize and add the map
@@ -30,6 +39,7 @@ function initMap(location, latitude, longitude, maps) {
     // The location of REIMS
 
     var position = {lat: latitude, lng: longitude};
+    
     var location = {
       lat: latitude,
       lng: longitude    
@@ -44,9 +54,10 @@ function initMap(location, latitude, longitude, maps) {
     // The marker, positioned at REIMS
     var marker = new google.maps.Marker({
       position: position,
-      setMap: maps
+      map : map
     });
   }
+
 
     // On crée une fonction qui agira selon la méthode qu'on définit 
     // dans notr cas, nous souhaitons récupérer ce que  l'user à mi
@@ -72,11 +83,14 @@ form.addEventListener("submit", function (event) {
   postFormData("/ajax", document.querySelector('#userText').value, {
       "Content-Type": "plain/text"
       })
+
       .then(response => {
-          createDiv(response.answer, chatbox, "chatbox", "p")
-          createDiv(response.article, chatbox, "chatbox", "p")
-          createDiv("Pour plus d'info: ", link, "linke", "p")
-          createLink(linke, "link", "a", response.url)
+          createDiv(response.question, chatbox, "p") //reprend la question
+          createDiv(response.answer, chatbox, "p") // réponse automatique
+          createDiv(response.article + response.url, chatbox, "p") //résumé wiki
           initMap(response.location, response.latitude, response.longitude, "map")
           })
       })
+
+
+

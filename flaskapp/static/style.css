@@ -71,7 +71,7 @@ p{
     margin: 10px;
     border-radius: 40px;
     border: outset rgb(9, 105, 9) 1px;
-    text-align: justify;
+    text-align: left;
     font-size:1.1rem;
 }
 
@@ -202,6 +202,19 @@ footer, .contenaire{
     color:#353fce
 }
 
+
+#logos
+{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+
+#logos img
+{
+    width: 59px;
+    height: 60px;
+}
 
 textarea{
     width: 600px

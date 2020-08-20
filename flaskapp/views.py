@@ -30,26 +30,256 @@ def ajax():
     user_text = request.data.decode()
     response = find_place_in_sentence(user_text)
 
-    if not response:
-        data = {"status": False,
-                "question":user_text,
-                "answer": generate_negative_answer(),
-                }
-
-    if response:
+    try:
         all_text, url, latitude, longitude = find_geocoords_with_google_maps(response)
-        data = {"status" : True,
+        
+        if latitude and longitude != None:
+            data = {"status" : True,
                 "location" : response,
                 "article" : all_text,
                 "answer": generate_positive_answer(),
                 "url":url,
                 "latitude" : latitude,
                 "longitude" : longitude,
+                "question": user_text,
                 }
+        else:
+            data = {"status": False,
+                    "question": user_text,
+                    "answer": generate_negative_answer(),
+                    }
+                    
+    except TypeError:
+        raise(TypeError," DEBUG2: no georcoods found")   
 
     return jsonify(data)
 
+
+##  ORIGINAL
+# @app.route("/ajax", methods=["POST"])
+# def ajax():
+
+#     data = {"status": False}
+
+#     user_text = request.data.decode()
+#     response = find_place_in_sentence(user_text)
+
+#     if response:
+#         all_text, url, latitude, longitude = find_geocoords_with_google_maps(response) 
+#         # ^ c'est ici où sa bug si on ne trouve pas de latitude et longitude
+#         # la condition IF ne sert à rien à cet endroit
+#         # car on rentre dedans, car parser trouvera toujours un lieu
+#         # qui peut être bon ou pas bon
+#         data = {"status" : True,
+#                 "location" : response,
+#                 "article" : all_text,
+#                 "answer": generate_positive_answer(),
+#                 "url":url,
+#                 "latitude" : latitude,
+#                 "longitude" : longitude,
+#                 "question": user_text,
+#                 }
+
+#     elif not response:
+#         data = {"status": False,
+#                 "question":user_text,
+#                 "answer": generate_negative_answer(),
+#                 }
+
+#     return jsonify(data)
+
+
+# # retour REPONSE NEGATIVE MEME SI LOCATION EST BONNE
+# @app.route("/ajax", methods=["POST"])
+# dej ajax():
+
+#     data = {"status": False}
+
+#     user_text =  request.data.decode() # decode le binary string en string
+#     response = find_place_in_sentence(user_text)
+
+#     all_text, url, latitude, longitude = find_geocoords_with_google_maps(response)
+
+#     if latitude or longitude == None:
+#         data = {"status": False,
+#         "question":user_text,
+#         "answer": generate_negative_answer(),
+#         }
+
+#     elif latitude or longitude != None:
+#         data = {"status" : True,
+#                 "location" : response,
+#                 "article" : all_text,
+#                 "answer": generate_positive_answer(),
+#                 "url":url,
+#                 "latitude" : latitude,
+#                 "longitude" : longitude,
+#                 "question": user_text,
+#                 }
+
+#     return jsonify(data) 
+
+
+# # NE FONCTIONNE PAS...
+# @app.route("/ajax", methods=["POST"])
+# def ajax():
+
+#     data = {"status": False}
+
+#     user_text =  request.data.decode() # decode le binary string en string
+#     response = find_place_in_sentence(user_text)
+
+#     coords = find_geocoords_with_google_maps(response)
+#     print("DEBUg1", coords)
+
+#     listcoord = []
     
+#     for value in len(coords):
+#         listcoord.append(value)
+
+#         if len(listcoords) == 3:
+#             data = {"status" : True,
+#             "location" : response,
+#             "article" : listcoord[0],
+#             "answer": generate_positive_answer(),
+#             "url":listcoord[1],
+#             "latitude" : listcoord[2],
+#             "longitude" : listcoord[3],
+#             "question": user_text,
+#             }
+
+#         else:
+#             data = {"status": False,
+#             "question":user_text,
+#             "answer": generate_negative_answer(),
+#             }
+
+#     return jsonify(data) 
+
+
+
+# ##  RETOUR REPONSE POSITIVE, bug SUR REPONSE NEGATIVE
+# ## INTERNAL ERROR SERVER ERROR 500
+# ## script.js:86 Uncaught (in promise) TypeError: Cannot read property 'question' of undefined
+# ## at script.js:86
+
+# @app.route("/ajax", methods=["POST"])
+# def ajax():
+
+#     data = {"status": False}
+
+#     user_text = request.data.decode()
+#     response = find_place_in_sentence(user_text)
+
+#     all_text, url, latitude, longitude = find_geocoords_with_google_maps(response)
+
+#     dic_donnees = {
+#                 "article": all_text,
+#                 "url":url,
+#                 "latitude":latitude,
+#                 "longitude":longitude,
+#                 }
+
+#     found = False
+    
+#     if dic_donnees["latitude"] and dic_donnees["longitude"]:
+#         found = True
+#         data = {"status" : True,
+#             "location" : response,
+#             "article" : all_text,
+#             "answer": generate_positive_answer(),
+#             "url":url,
+#             "latitude" : latitude,
+#             "longitude" : longitude,
+#             "question": user_text,
+#             }
+
+#     if not dic_donnees["latitude"] and not dic_donnees["longitude"]:
+#         found = False
+#         data = {"status": False,
+#                 "question": user_text,
+#                 "answer": generate_negative_answer(),
+#                 }
+
+
+#     return jsonify(data)
+
+
+
+
+    # # all_text, url, latitude, longitude = find_geocoords_with_google_maps(response)
+
+    # if latitude and longitude != None:
+
+    # elif latitude and longitude == None:
+
+
+# @app.route("/ajax", methods=["POST"])
+# def ajax():
+
+#     data = {"status": False}
+
+#     user_text = request.data.decode()
+#     response = find_place_in_sentence(user_text)
+
+#     if response:
+#         all_text, url, latitude, longitude = find_geocoords_with_google_maps(response) 
+#         # ^ c'est ici où sa bug si on ne trouve pas de latitude et longitude
+#         # la condition IF ne sert à rien à cet endroit
+#         # car on rentre dedans, car parser trouvera toujours un lieu
+#         # qui peut être bon ou pas bon
+#         data = {"status" : True,
+#                 "location" : response,
+#                 "article" : all_text,
+#                 "answer": generate_positive_answer(),
+#                 "url":url,
+#                 "latitude" : latitude,
+#                 "longitude" : longitude,
+#                 "question": user_text,
+#                 }
+
+#     elif not response:
+#         data = {"status": False,
+#                 "question":user_text,
+#                 "answer": generate_negative_answer(),
+#                 }
+
+#     return jsonify(data)
+
+    
+    # ORINALE QUI FONCTIONNE LORSQUE LES GEO COORDS SONT TROUVEES
+# @app.route("/ajax", methods=["POST"])
+# def ajax():
+    # data = {"status": False}
+
+    # user_text = request.data.decode()
+    # response = find_place_in_sentence(user_text)
+
+    # if response:
+    #     all_text, url, latitude, longitude = find_geocoords_with_google_maps(response) 
+    #     # ^ c'est ici où sa bug si on ne trouve pas de latitude et longitude
+    #     # la condition IF ne sert à rien à cet endroit
+    #     # car on rentre dedans, car parser trouvera toujours un lieu
+    #     # qui peut être bon ou pas bon
+    #     data = {"status" : True,
+    #             "location" : response,
+    #             "article" : all_text,
+    #             "answer": generate_positive_answer(),
+    #             "url":url,
+    #             "latitude" : latitude,
+    #             "longitude" : longitude,
+    #             "question": user_text,
+    #             }
+
+    # elif not response:
+    #     data = {"status": False,
+    #             "question":user_text,
+    #             "answer": generate_negative_answer(),
+    #             }
+
+    # return jsonify(data)
+
+
     # data = {"status": False}
 
     # user_text = request.data.decode()
