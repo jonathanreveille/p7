@@ -16,11 +16,11 @@ function createDiv(text, parent, type) {
   return div
 } 
 
-function createResponseWithLink(url, innertext, response, id){
+function createResponseWithLink(url, response, id){
   let newLink = document.createElement("a");
   newLink.href = url;
   newLink.target = "_blank";
-  newLink.innerHTML = "Pour plus d'information";
+  newLink.innerHTML = "ALLEZ C'EST PARTI !";
   
   let par  = document.createElement("p");
   par.innerHTML = response;
@@ -53,7 +53,6 @@ function initMap(location, latitude, longitude, maps) {
     });
   }
 
-
     // On crée une fonction qui agira selon la méthode qu'on définit 
     // dans notr cas, nous souhaitons récupérer ce que  l'user à mi
 async function postFormData (url, data, headers) {
@@ -77,7 +76,6 @@ form.addEventListener("submit", function (event) {
   postFormData("/ajax", document.querySelector('#userText').value, {
       "Content-Type": "plain/text"
       })
-
       .then(response => {
           createDiv(response.question, buble, "p") //reprend la question
           createDiv(response.answer, buble, "p") // réponse automatique
