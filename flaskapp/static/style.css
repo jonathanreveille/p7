@@ -80,6 +80,11 @@ p{
     color:black;
 }
 
+.buble1{
+    /* background: mediumseagreen; */
+    color:blue;
+}
+
 .input--usertext{
     width:600px;
     height:5em;

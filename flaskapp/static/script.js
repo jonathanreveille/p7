@@ -4,34 +4,29 @@
 
 let form = document.querySelector("#user-text-form");
 let chatbox = document.querySelector("#chatbox");
+let buble = document.querySelector("#buble1");
+let link = document.querySelector('.link');
 
 
 // NEW FUNCTION : CREATE ELEMENT AND APPENDCHILD INTO THE DOM
 function createDiv(text, parent, type) {
-    let div = document.createElement(type);
-    div.textContent = text;
-    parent.appendChild(div);
-    return div
-}
-
-function createDivForLink(text, parent, id, type) {
   let div = document.createElement(type);
-  div.id  = id;
   div.textContent = text;
   parent.appendChild(div);
   return div
-}
+} 
 
+function createResponseWithLink(url, innertext, response, id){
+  let newLink = document.createElement("a");
+  newLink.href = url;
+  newLink.target = "_blank";
+  newLink.innerHTML = "Pour plus d'information";
+  
+  let par  = document.createElement("p");
+  par.innerHTML = response;
+  par.appendChild(newLink);
 
-// NEW FONCTION : CREATE A LINK INTO AND APPENDCHILD INTO THE DOM
-function createLink(parent, id, type, url, text) {
-    let linky = document.createElement(type);
-    linky.id = id;
-    linky.href = url;
-    linky.textContent = text; 
-    linky.target = "_blank"
-    parent.appendChild(linky)
-    return linky
+  document.getElementById(id).appendChild(par);
 }
 
 // Initialize and add the map
@@ -72,8 +67,7 @@ async function postFormData (url, data, headers) {
     }
     catch (error) {
         return console.log(error);
-    }
-    }
+    }}
 
 
 form.addEventListener("submit", function (event) {
@@ -85,12 +79,9 @@ form.addEventListener("submit", function (event) {
       })
 
       .then(response => {
-          createDiv(response.question, chatbox, "p") //reprend la question
-          createDiv(response.answer, chatbox, "p") // réponse automatique
-          createDiv(response.article + response.url, chatbox, "p") //résumé wiki
+          createDiv(response.question, buble, "p") //reprend la question
+          createDiv(response.answer, buble, "p") // réponse automatique
+          createResponseWithLink(response.url, response.article, "buble1")
           initMap(response.location, response.latitude, response.longitude, "map")
           })
       })
-
-
-

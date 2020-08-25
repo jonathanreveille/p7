@@ -26,7 +26,6 @@ def about():
 def ajax():
 
     data = {"status": False}
-
     user_text = request.data.decode()
     response = find_place_in_sentence(user_text)
 
@@ -43,17 +42,42 @@ def ajax():
                 "longitude" : longitude,
                 "question": user_text,
                 }
-        else:
-            data = {"status": False,
-                    "question": user_text,
-                    "answer": generate_negative_answer(),
-                    }
-                    
+
     except TypeError:
-        raise(TypeError," DEBUG2: no georcoods found")   
+        data = {"status": False,
+        "question": user_text,
+        "answer": generate_negative_answer(),
+        "article" : "Tu peux resaisir ta question dans le champs de recherche s'il-te-plaît?",
+        "url": "?"
+        }
 
     return jsonify(data)
+    
+    # try:
+    #     all_text, url, latitude, longitude = find_geocoords_with_google_maps(response)
+        
+    #     if latitude and longitude == None:
+    #         data = {"status": False,
+    #                 "question": user_text,
+    #                 "answer": generate_negative_answer(),
+    #                 }
 
+    #     # else:
+    #     elif latitude and longitude != None:
+    #         data = {"status" : True,
+    #             "location" : response,
+    #             "article" : all_text,
+    #             "answer": generate_positive_answer(),
+    #             "url":url,
+    #             "latitude" : latitude,
+    #             "longitude" : longitude,
+    #             "question": user_text,
+    #             }
+
+    # except TypeError:
+    #     raise(TypeError," DEBUG2: no georcoods found")   
+
+    # return jsonify(data)
 
 ##  ORIGINAL
 # @app.route("/ajax", methods=["POST"])
