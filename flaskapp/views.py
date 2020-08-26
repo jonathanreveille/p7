@@ -16,7 +16,8 @@ API_KEY_FRONT= os.getenv("SECRET_KEY_FRONT")
 def home():
     return render_template("index.html", title="Home", API_KEY=API_KEY_FRONT )
 
-# Créer l'onglet about
+
+# Créer l'onglet about -- Pas besoin selon le cahier des charges
 @app.route("/about")
 def about():
     return render_template("about.html", title="About")

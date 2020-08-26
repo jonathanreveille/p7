@@ -5,7 +5,6 @@
 let form = document.querySelector("#user-text-form");
 let chatbox = document.querySelector("#chatbox");
 let buble = document.querySelector("#buble1");
-let link = document.querySelector('.link');
 
 
 // NEW FUNCTION : CREATE ELEMENT AND APPENDCHILD INTO THE DOM
@@ -16,11 +15,11 @@ function createDiv(text, parent, type) {
   return div
 } 
 
-function createResponseWithLink(url, response, id){
+function createResponseWithLink(url, response, id, innertext){
   let newLink = document.createElement("a");
   newLink.href = url;
   newLink.target = "_blank";
-  newLink.innerHTML = "ALLEZ C'EST PARTI !";
+  newLink.innerHTML = innertext;
   
   let par  = document.createElement("p");
   par.innerHTML = response;
@@ -32,7 +31,6 @@ function createResponseWithLink(url, response, id){
 // Initialize and add the map
 function initMap(location, latitude, longitude, maps) {
     // The location of REIMS
-
     var position = {lat: latitude, lng: longitude};
     
     var location = {
@@ -51,7 +49,7 @@ function initMap(location, latitude, longitude, maps) {
       position: position,
       map : map
     });
-  }
+    }
 
     // On crée une fonction qui agira selon la méthode qu'on définit 
     // dans notr cas, nous souhaitons récupérer ce que  l'user à mi
@@ -69,6 +67,19 @@ async function postFormData (url, data, headers) {
     }}
 
 
+function processEverything(response){
+  if (response.status === true) {
+    createDiv(response.question, buble, "p");
+    createDiv(response.answer, buble, "p");
+    createResponseWithLink(response.url, response.article, "buble1",  " Pour plus d'informations...");
+    initMap(response.location, response.latitude, response.longitude, "map");
+  } else {
+    createDiv(response.question, buble, "p");
+    createDiv(response.answer, buble, "p");
+    createResponseWithLink(response.url, response.article, "buble1", " ou relancer une recherche, cliquez-ici.");
+  }
+}
+
 form.addEventListener("submit", function (event) {
   event.preventDefault();
 
@@ -76,10 +87,29 @@ form.addEventListener("submit", function (event) {
   postFormData("/ajax", document.querySelector('#userText').value, {
       "Content-Type": "plain/text"
       })
-      .then(response => {
-          createDiv(response.question, buble, "p") //reprend la question
-          createDiv(response.answer, buble, "p") // réponse automatique
-          createResponseWithLink(response.url, response.article, "buble1")
-          initMap(response.location, response.latitude, response.longitude, "map")
-          })
-      })
+      .then(response => {processEverything(response)
+    })
+  })
+
+
+
+  // // Envoyer le contenu du formulaire au serveur
+  // postFormData("/ajax", document.querySelector('#userText').value, {
+  //   "Content-Type": "plain/text"
+  //   })
+  //   .then(response => {
+  //       createDiv(response.question, buble, "p") //reprend la question
+  //       createDiv(response.answer, buble, "p") // réponse automatique
+  //       createResponseWithLink(response.url, response.article, "buble1")
+  //       initMap(response.location, response.latitude, response.longitude, "map")
+  //       })
+  //   })
+
+
+
+// function sendError(){
+//   let error_message = document.createElement("h1");
+//   error_message.textContent = "DEBUG : JE NE TROUVE PAS TON LIEU, DIS MOI A NOUVEAU";
+//   buble.appendChild(error_message);
+//   return error_message
+// }

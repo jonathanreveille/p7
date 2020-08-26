@@ -104,7 +104,7 @@ class MediaWiki:
         self.summary = self.extracted_data["query"]["pages"][str(
             page)]["extract"]
             
-        print(self.summary)
+        print(self.summary[0:500])
         return self.summary
 
     def extract_fullurl(self):

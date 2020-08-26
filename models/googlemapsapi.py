@@ -2,6 +2,7 @@
 # coding : utf-8
 import os
 import requests
+import json
 from models.location import Location
 from dotenv import load_dotenv
 
@@ -22,6 +23,7 @@ class GoogleMaps:
             "key": SECRET_KEY
         }
         self.search_json = dict()
+        self.search_req = None
         self.location = dict()
         self.latitude = float()
         self.longitude = float()
@@ -50,6 +52,7 @@ class GoogleMaps:
         we need from json"""
 
         self.search_json = self.search_req.json()
+
         try:
             self.location = self.search_json["results"][0]["geometry"]["location"]
         except IndexError:
