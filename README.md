@@ -1,4 +1,4 @@
-# This is project 7 of Openclassrooms Python Course - Grandpy Bot :snake:
+# Project 7 - Openclassrooms Python Course - Grandpy Bot :snake:
 
 ## Ask a question to Grandpy and he will tell you a story about it !
 
