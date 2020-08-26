@@ -41,25 +41,23 @@ been coded in python for this project. Use of tests and mocks from the
 the pytest library.
 In the folder **models**, you will find the methods that were
 tested in the test folder.
-in the folder **flaskapp**, you will find the flask application.
+In the folder **flaskapp**, you will find the flask application.
 
 
 ##  Getting started
 
 If you want to run this project, clone this project,
-but you will need to get on your google account your own
-API key to use their services. Also, warning, do not use this
-application in a production deployment.
+but you will need to get your own API key
+from the google developer console.
 
-
-First of all, first you need to **install pipenv**
+First of all, you need to **install pipenv**.
 * `pipenv install` (install all requirements), once loaded, don't
 forget to `pipenv shell` in your terminal to activate  the environment.
 The **advantage** of pipenv is that it is cross-platform. It is 
 recommended by the official documentation for python's virtual
 environment.
 
-Second, run the command :
+Second, run the command in your terminal :
 * `python -m  main` (kickstarts the server and it gives you access to the project)
 * You may connect yourself at this adress on your web browser : http://localhost:5000/ or click on
 the link that is presented on your terminal screen.
@@ -67,7 +65,6 @@ the link that is presented on your terminal screen.
 
 ### RUN Test
 * Simply run this command in your terminal in the project : `pytest -vvv`
-
 
 ## Acknowledgment
 I would like to thank my mentor, Thierry Chappuis, for all the help
