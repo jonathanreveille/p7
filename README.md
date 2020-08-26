@@ -1,4 +1,4 @@
-# This is project 7 of Openclassrooms - Grandpy Bot :snake:
+# This is project 7 of Openclassrooms Python Course - Grandpy Bot :snake:
 
 ## Ask a question to Grandpy and he will tell you a story about it !
 
@@ -14,7 +14,7 @@
 - Respect and follow recommendations from PEP8(style guide),
  PEP257(docformatter)
 
-### The project
+## The project
 For this project we had to create a Flask application called Grandpy.
 It's a bot that is personified as a grandfather, and he will answer 
 to you in french about some location you have asked him about.
@@ -44,7 +44,7 @@ tested in the test folder.
 in the folder **flaskapp**, you will find the flask application.
 
 
-###  Getting started
+##  Getting started
 
 If you want to run this project, clone this project,
 but you will need to get on your google account your own
@@ -69,6 +69,6 @@ the link that is presented on in your terminal screen.
 * Simply run this command in your terminal in the project : `pytest -vvv`
 
 
-### Acknowledgment
+## Acknowledgment
 I would like to thank my mentor, Thierry Chappuis, for all the help
 and advices he gave to me to accomplish this project.
