@@ -11,7 +11,7 @@
 - Test Driven Development on python code side with pytest.
 - Use GoogleMaps API services, and MediaWiki API services.
 - Use of pipenv (virtual env.)
-- Respect and follow recommendations from PEP8(style guide),
+- Respect and follow recommendations from PEP8 (style guide),
  PEP257(docformatter)
 
 ## The project
@@ -60,9 +60,9 @@ recommended by the official documentation for python's virtual
 environment.
 
 Second, run the command :
-* `python -m  main` (kickstarts the server and the access to the project)
+* `python -m  main` (kickstarts the server and it gives you access to the project)
 * You may connect yourself at this adress on your web browser : http://localhost:5000/ or click on
-the link that is presented on in your terminal screen.
+the link that is presented on your terminal screen.
 * You may now interact with Grandpy Bot, he has a bunch of positive/negative answers to reply.
 
 ### RUN Test
