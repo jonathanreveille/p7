@@ -65,6 +65,8 @@ Second, run the command :
 the link that is presented on in your terminal screen.
 * You may now interact with Grandpy Bot, he has a bunch of positive/negative answers to reply.
 
+### RUN Test
+* Simply run this command in your terminal in the project : `pytest -vvv`
 
 
 ### Acknowledgment
